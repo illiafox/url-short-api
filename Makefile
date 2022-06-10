@@ -5,7 +5,7 @@ all: clean build run
 run:
 	(cd $(BUILD) && ./app)
 
-run cache:
+run-cache:
 	(cd $(BUILD) && ./app -cache)
 
 build: clean
@@ -19,3 +19,6 @@ compose-up: compose-down
 
 compose-down:
 	docker-compose down
+
+test:
+	go test -v ./...
