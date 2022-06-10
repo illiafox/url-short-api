@@ -50,11 +50,11 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - POSTGRES_IP=database
-      - POSTGRES_PORT=5432
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=short_url
+      - PG_IP=database
+      - PG_PORT=5432
+      - PG_USER=postgres
+      - PG_PASSWORD=postgres
+      - PG_DB=short_url
     networks:
       - local
     restart: on-failure

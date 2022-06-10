@@ -91,7 +91,7 @@ func (h *handler) Get(c *gin.Context) {
 
 func (h *handler) Key(c *gin.Context) {
 	key := c.Param("key")
-	if key == "" {
+	if len(key) != 10 {
 		c.Status(http.StatusBadRequest)
 
 		return

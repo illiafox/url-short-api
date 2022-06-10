@@ -1,5 +1,10 @@
 ![Logo](./logo.svg)
-### Задание на позицию Junior Backend Developer
+### Задание на позицию Trainee Backend Developer
+
+
+---
+
+### [English Translation](./readme.md)
 
 ---
 
@@ -64,6 +69,25 @@ docker-compose up # make compose-up
 
 ---
 
+## Подготовка PostgreSQL
+
+### Создание таблиц
+
+docker-compose сделает это автоматически
+
+```shell
+migrate -database ${POSTGRESQL_URL} -path migrate/ up
+```
+
+### Тесты
+1. Тестовая таблица должна быть пустая
+2. После тестов таблица автоматически очищается
+```shell
+PG_USER=... PG_PASSWORD=... go test -v ./... # make test
+```
+
+---
+
 ## Сборка и запуск
 
 ```shell
@@ -71,7 +95,7 @@ make build
 make run  # cd cmd/app && ./app
 ```
 
-### Задать пути к конфиг и лог файлу:
+### Задать пути к конфигу и лог файлу:
 ```shell
 app -log=log.txt -config=config.toml
 ```
@@ -83,7 +107,7 @@ app -https
 
 ### Использовать встроенное хранилище:
 ```shell
-app -cache # make run cache
+app -cache # make run-cache
 ```
 
 ### Изменить значения через переменные среды:
@@ -126,4 +150,4 @@ HOST_PORT=80 app
 ### P.S. 
 Это первая попытка в `clean architecture`, замечания и pull реквесты приветствуются.
 
-Реализацию с `PostresSQL` вынес в отдельную ветку потому что, имхо, `Redis` (и другие NoSQL `key:value` базы) не только быстрее, но и удобнее в использовании. Например, с помощью `TTL` можно очищать старые ссылки, а информацию хранить в виде `ключ:ссылка` 
+Реализацию с `PostresSQL` вынес в отдельную ветку потому что, имхо, `Redis` (и другие NoSQL `key:value` базы) не только быстрее, но и удобнее в использовании. Например, с помощью `TTL` можно очищать старые данные, а информацию хранить в виде `ключ:ссылка` 

@@ -3,12 +3,12 @@ package config
 // Databases
 
 type Postgres struct {
-	User     string `env:"POSTGRES_USER"     env-required:""`
-	Pass     string `env:"POSTGRES_PASSWORD" env-required:""`
-	DBName   string `env:"POSTGRES_DB"       env-required:""`
-	IP       string `env:"POSTGRES_IP"       env-required:""`
-	Port     int    `env:"POSTGRES_PORT"     env-default:"5432"`
-	Protocol string `env:"POSTGRES_PROTOCOL" env-default:"tcp"`
+	User     string `env:"PG_USER"     env-required:""`
+	Pass     string `env:"PG_PASSWORD" env-required:""`
+	DBName   string `env:"PG_DB"       env-required:""`
+	IP       string `env:"PG_IP"       env-required:""`
+	Port     int    `env:"PG_PORT"     env-default:"5432"`
+	Protocol string `env:"PG_PROTOCOL" env-default:"tcp"`
 }
 
 // Host
