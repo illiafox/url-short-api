@@ -17,7 +17,7 @@ func (app *App) Listen() {
 	defer app.closers.logfile()
 	defer app.closers.logger()
 	//
-	if !app.flags.inmemory {
+	if !app.flags.cache {
 		defer app.closers.db()
 	}
 	// //
