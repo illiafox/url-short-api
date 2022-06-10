@@ -5,8 +5,8 @@ all: clean build run
 run:
 	(cd $(BUILD) && ./app)
 
-run-in-memory:
-	(cd $(BUILD) && ./app --in-memory)
+run cache:
+	(cd $(BUILD) && ./app -cache)
 
 build: clean
 	go build -o $(BUILD)/app $(BUILD)

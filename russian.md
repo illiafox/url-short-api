@@ -83,7 +83,7 @@ app -https
 
 ### Использовать встроенное хранилище:
 ```shell
-app --in-memory # make run-in-memory
+app -cache # make run cache
 ```
 
 ### Изменить значения через переменные среды:
@@ -101,7 +101,7 @@ HOST_PORT=80 app
 12:00:01 | INFO | Reading config
 12:00:01 | INFO | Initializing service
 12:00:01 | INFO | Initializing storage
-12:00:01 | WARN | Using in-memory storage
+12:00:01 | WARN | Using built-in storage
 12:00:01 | INFO | Server started {"addr": "0.0.0.0:8080"}
 13:15:01 | INFO | Shutting down server
 ```
@@ -110,14 +110,14 @@ HOST_PORT=80 app
 {"level":"info","ts":"Fri, 10 Jun 2022 12:00:01 EEST","msg":"Reading config"}
 {"level":"info","ts":"Fri, 10 Jun 2022 12:00:01 EEST","msg":"Initializing service"}
 {"level":"info","ts":"Fri, 10 Jun 2022 12:00:01 EEST","msg":"Initializing storage"}
-{"level":"warn","ts":"Fri, 10 Jun 2022 12:00:01 EEST","msg":"Using in-memory storage"}
+{"level":"warn","ts":"Fri, 10 Jun 2022 12:00:01 EEST","msg":"Using built-in storage"}
 {"level":"info","ts":"Fri, 10 Jun 2022 12:00:01 EEST","msg":"Server started","addr":"0.0.0.0:8080"}
 {"level":"info","ts":"Fri, 10 Jun 2022 13:15:01 EEST","msg":"Shutting down server"}
 ```
 
 ---
 
-## TODO (Your contribution is welcome):
+## TODO (contribution is welcome):
 1. Заменить реализацию хранилища с sync.RWMutex на более быстрый атомарный вариант
 2. Сделать ветки со всеми роутерами
 
