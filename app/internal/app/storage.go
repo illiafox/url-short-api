@@ -14,8 +14,8 @@ func (app *App) Storage() links.Storage {
 
 	var storage links.Storage
 
-	if app.flags.inmemory {
-		app.logger.Warn("Using in-memory storage")
+	if app.flags.cache {
+		app.logger.Warn("Using built-in storage")
 		// cache
 		storage = links2.NewMemStorage()
 	} else {
