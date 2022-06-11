@@ -2,7 +2,6 @@ package app
 
 import (
 	"go.uber.org/zap"
-	"ozon-url-shortener/app/internal/adapters/links"
 	"ozon-url-shortener/app/internal/config"
 )
 
@@ -12,19 +11,11 @@ type App struct {
 	logger *zap.Logger
 	cfg    config.Config
 	//
-	service links.Service
-	//
 	closers struct {
-		logger  func()
-		logfile func()
-		db      func()
+		logger, db func() error
 	}
 }
 
 func (app *App) Run() {
-	app.Logger()
-	app.ReadConfig()
-
-	app.Service()
 	app.Listen()
 }
