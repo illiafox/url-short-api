@@ -25,9 +25,13 @@ func (app *App) Storage() links.Storage {
 			app.logger.Fatal("connect to postgres: ", zap.Error(err))
 		}
 
-		app.closers.db = pool.Close
-
 		storage = links2.NewPgStorage(pool)
+
+		app.closers.db = func() error {
+			pool.Close()
+
+			return nil
+		}
 	}
 
 	return storage

@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -14,12 +15,21 @@ import (
 )
 
 func (app *App) Listen() {
-	defer app.closers.logfile()
-	defer app.closers.logger()
-	//
-	if !app.flags.cache {
-		defer app.closers.db()
-	}
+	defer func() {
+		if !app.flags.cache {
+			err := app.closers.db()
+
+			if err != nil {
+				app.logger.Error("close database", zap.Error(err))
+			}
+		}
+
+		err := app.closers.logger()
+		if err != nil {
+			log.Fatalf("close logger: %v", err)
+		}
+	}()
+
 	// //
 
 	srv := &http.Server{

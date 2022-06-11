@@ -5,10 +5,14 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"ozon-url-shortener/app/internal/adapters/links/api"
+	"ozon-url-shortener/app/internal/domain/links"
 )
 
 func (app *App) Handler() http.Handler {
-	h := api.NewHandler(app.logger.Named("api"), app.service)
+	h := api.NewHandler(
+		app.logger.Named("api"),
+		links.NewService(app.Storage()),
+	)
 
 	if !app.flags.debug {
 		gin.SetMode(gin.ReleaseMode)
