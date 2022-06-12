@@ -10,7 +10,7 @@
 
 ## Другие ветки:
 
-### - [`redis`](https://github.com/illiafox/url-short-api) основная
+### - [`postgres`](https://github.com/illiafox/url-short-api/tree/pg) реализация с `PostgreSQL`
 ### - [`mux`](https://github.com/illiafox/url-short-api/tree/mux)  роутер [gorilla / mux](https://github.com/gorilla/mux)
 
 --- 
@@ -67,24 +67,6 @@ docker-compose up # make compose-up
     ... (переадресация на сайт)
     ```
 
----
-
-## Подготовка PostgreSQL
-
-### Создание таблиц
-
-docker-compose сделает это автоматически
-
-```shell
-migrate -database ${POSTGRESQL_URL} -path migrate/ up
-```
-
-### Тесты
-1. Тестовая таблица должна быть пустая
-2. После тестов таблица автоматически очищается
-```shell
-PG_USER=... PG_PASSWORD=... go test -v ./... # make test
-```
 
 ---
 
@@ -149,5 +131,3 @@ HOST_PORT=80 app
 
 ### P.S. 
 Это первая попытка в `clean architecture`, замечания и pull реквесты приветствуются.
-
-Реализацию с `PostresSQL` вынес в отдельную ветку потому что, имхо, `Redis` (и другие NoSQL `key:value` базы) не только быстрее, но и удобнее в использовании. Например, с помощью `TTL` можно очищать старые данные, а информацию хранить в виде `ключ:ссылка` 

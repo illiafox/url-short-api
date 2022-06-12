@@ -17,5 +17,6 @@ type App struct {
 }
 
 func (app *App) Run() {
+	app.ReadConfig()
 	app.Listen()
 }

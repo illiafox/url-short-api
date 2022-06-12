@@ -10,7 +10,7 @@
 
 ## Branches:
 
-### - [`redis`](https://github.com/illiafox/url-short-api) main
+### - [`postgres`](https://github.com/illiafox/url-short-api/tree/pg) `PostgreSQL` implementation
 ### - [`mux`](https://github.com/illiafox/url-short-api/tree/mux)  [gorilla / mux](https://github.com/gorilla/mux) router
 
 --- 
@@ -68,28 +68,6 @@ docker-compose up # make compose-up
     ```
 
 ---
-
-## PostgreSQL Setup
-
-### Create tables
-
-docker-compose does this automatically
-
-```shell
-migrate -database ${POSTGRESQL_URL} -path migrate/ up
-```
-
-### Test
-1. Test table must be empty
-2. The table will be truncated after tests
-
-```shell
-PG_USER=... PG_PASSWORD=... go test -v ./... # make test
-```
-
----
-
-
 
 ## Building and Running
 

@@ -2,13 +2,10 @@ package config
 
 // Databases
 
-type Postgres struct {
-	User     string `env:"PG_USER"     env-required:""`
-	Pass     string `env:"PG_PASSWORD" env-required:""`
-	DBName   string `env:"PG_DB"       env-required:""`
-	IP       string `env:"PG_IP"       env-required:""`
-	Port     int    `env:"PG_PORT"     env-default:"5432"`
-	Protocol string `env:"PG_PROTOCOL" env-default:"tcp"`
+type Redis struct {
+	Address string `env:"REDIS_ADDRESS" env-default:"0.0.0.0:6379"`
+	Pass    string `env:"REDIS_PASS"    env-default:""`
+	DB      int    `env:"REDIS_DB"      env-default:"0"`
 }
 
 // Host
@@ -23,7 +20,7 @@ type Host struct {
 //
 
 type Config struct {
-	Postgres Postgres
+	Redis Redis
 	//
 	Host Host
 }

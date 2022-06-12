@@ -1,13 +1,10 @@
-[Postgres]
-User = "server"
-Pass = "M5F3wWtFxkQ8Ra4n"
-DBName = "jwt_example"
-IP = "127.0.0.1"
-Port = 5432
-Protocol = "tcp"
+[Redis]
+Address = "0.0.0.0:6379"
+Pass = "password"
+DB = 0
 
 [Host]
-Addr="0.0.0.0"
+Addr = "0.0.0.0"
 Port = 8080
 Key = "cert/localhost.key"
 Cert = "cert/localhost.crt"

@@ -1,12 +1,13 @@
 package app
 
 import (
+	"os"
 	"time"
 
 	"go.uber.org/zap"
 	links2 "ozon-url-shortener/app/internal/adapters/db/links"
 	"ozon-url-shortener/app/internal/domain/links"
-	"ozon-url-shortener/app/pkg/client/pg"
+	"ozon-url-shortener/app/pkg/client/redis"
 )
 
 func (app *App) Storage() links.Storage {
@@ -19,19 +20,25 @@ func (app *App) Storage() links.Storage {
 		// cache
 		storage = links2.NewMemStorage()
 	} else {
-		// postgres
-		pool, err := pg.NewPool(time.Second*3, pg.Config(app.cfg.Postgres))
+		client, err := redis.New(redis.Config(app.cfg.Redis), time.Second*5)
 		if err != nil {
-			app.logger.Fatal("connect to postgres: ", zap.Error(err))
+			app.logger.Error("init redis",
+				zap.Error(err),
+			)
+
+			// close logger
+			err = app.closers.logger()
+			if err != nil {
+				app.logger.Error("close logger",
+					zap.Error(err),
+				)
+			}
+
+			os.Exit(1)
 		}
 
-		storage = links2.NewPgStorage(pool)
-
-		app.closers.db = func() error {
-			pool.Close()
-
-			return nil
-		}
+		storage = links2.NewRedisStorage(client)
+		app.closers.db = client.Close
 	}
 
 	return storage

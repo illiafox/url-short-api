@@ -2,61 +2,38 @@ version: '3.3'
 
 
 services:
-  postgresql:
-    image: postgres:latest
-    container_name: postgres
+
+  redis:
+    restart: on-failure
+
+    image: "redis:latest"
+
+    command: redis-server --port 6380 --requirepass password
+
+    ports:
+      - "6380:6380"
+
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: short_url
-    networks:
-      local:
-        aliases:
-          - database
-
-    restart: on-failure
-
-    healthcheck:
-      test: pg_isready -U postgres -d short_url
-      interval: 10s
-      timeout: 3s
-      retries: 5
-
-  migrate:
-    image: migrate/migrate
-
-    restart: on-failure
-
-    depends_on:
-      - postgresql
-
-    volumes:
-      - ./migrate:/database
+      REDIS_REPLICATION_MODE: master
 
     networks:
       - local
-
-    command:
-      [ "-database",  "postgres://postgres:postgres@database:5432/short_url?sslmode=disable" , "-path", "/database", "up" ]
-
 
   app:
     depends_on:
-      - postgresql
-      - migrate
+      - redis
 
     build: .
-    container_name: app
+
     ports:
       - "8080:8080"
     environment:
-      - PG_IP=database
-      - PG_PORT=5432
-      - PG_USER=postgres
-      - PG_PASSWORD=postgres
-      - PG_DB=short_url
+      - REDIS_ADDRESS=redis:6380
+      - REDIS_DB=0
+      - REDIS_PASSWORD=password
     networks:
       - local
+
     restart: on-failure
 
 networks:
