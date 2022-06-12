@@ -10,7 +10,7 @@
 
 ## Branches:
 
-### - [`postgres`](https://github.com/illiafox/url-short-api/tree/pg) `PostgreSQL` implementation
+### - [`PostgreSQL`](https://github.com/illiafox/url-short-api/tree/pg) implementation
 ### - [`mux`](https://github.com/illiafox/url-short-api/tree/mux)  [gorilla / mux](https://github.com/gorilla/mux) router
 
 --- 
