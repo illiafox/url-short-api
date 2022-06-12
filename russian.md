@@ -10,7 +10,7 @@
 
 ## Другие ветки:
 
-### - [`postgres`](https://github.com/illiafox/url-short-api/tree/pg) реализация с `PostgreSQL`
+### - [`PostgreSQL`](https://github.com/illiafox/url-short-api/tree/pg) реализация
 ### - [`mux`](https://github.com/illiafox/url-short-api/tree/mux)  роутер [gorilla / mux](https://github.com/gorilla/mux)
 
 --- 
